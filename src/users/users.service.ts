@@ -11,6 +11,18 @@ export class UsersService {
     });
   }
 
+  async findById(id: number) {
+    return this.prisma.user.findUnique({
+      where: { id },
+      select: {
+        id: true,
+        email: true,
+        createdAt: true,
+        updatedAt: true,
+      },
+    });
+  }
+
   async create(email: string, hash: string) {
     return this.prisma.user.create({
       data: {

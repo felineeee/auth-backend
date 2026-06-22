@@ -42,10 +42,16 @@ export class AuthService {
     userId: number,
     email: string,
   ): Promise<{ access_token: string }> {
+    const secret = process.env.JWT_SECRET;
+    if (!secret) {
+      throw new Error(
+        'FATAL CONFIGURATION ERROR: JWT_SECRET environment variable is not defined!',
+      );
+    }
     const payload = { sub: userId, email };
     const token = await this.jwtService.signAsync(payload, {
       expiresIn: '15m',
-      secret: process.env.JWT_SECRET,
+      secret: secret,
     });
 
     return { access_token: token };
