@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:15-alpine
+    container_name: auth_backend_db
+    environment:
+      POSTGRES_USER: c_log
+      POSTGRES_PASSWORD: supersecretpassword
+      POSTGRES_DB: auth_backend_db
+    ports:
+      - '5432:5432'
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
