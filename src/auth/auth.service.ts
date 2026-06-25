@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma.service';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
 import { AuthDto } from './auth.dto';
-import { authenticator } from 'otplib';
+import * as otplib from 'otplib';
 import * as qrcode from 'qrcode';
 import { access } from 'fs';
 import { debug } from 'console';
@@ -54,6 +54,11 @@ export class AuthService {
       throw new ForbiddenException('Invalid credentials');
     }
 
+    if (!user.hash) {
+      throw new ForbiddenException(
+        'This account was created using Google Login. Please sign in via Google.',
+      );
+    }
     // ERR changes on optional `hash` field, on OAuth login feature
     const passwordMatches = await bcrypt.compare(dto.password, user.hash);
     if (!passwordMatches) {
@@ -214,8 +219,12 @@ export class AuthService {
     };
   }
   async generate2faSecret(userId: number, email: string) {
-    const secret = authenticator.generateSecret();
-    const otpauthUrl = authenticator.keyuri(email, 'MyAuthBackendApp', secret);
+    const secret = otplib.generateSecret();
+    const otpauthUrl = otplib.generateURI({
+      issuer: 'MyAuthBackendApp',
+      label: email,
+      secret: secret,
+    });
 
     await this.prisma.user.update({
       where: { id: userId },
@@ -234,7 +243,7 @@ export class AuthService {
     if (!user || !user.twoFactorSecret)
       throw new ForbiddenException('2FA is not set up');
 
-    const isValid = authenticator.verify({
+    const isValid = await otplib.verify({
       token,
       secret: user.twoFactorSecret,
     });

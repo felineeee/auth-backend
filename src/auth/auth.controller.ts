@@ -56,8 +56,8 @@ export class AuthController {
     @Body() dto: AuthDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const tokens = await this.authService.signup(dto);
-    this.setCookies(res, tokens);
+    const result = await this.authService.signup(dto);
+    this.setCookies(res, result);
 
     return { message: 'Account registered sucessfully' };
   }
@@ -68,8 +68,11 @@ export class AuthController {
     @Body() dto: AuthDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    const tokens = await this.authService.signin(dto);
-    this.setCookies(res, tokens);
+    const result = await this.authService.signin(dto);
+    if ('requires2fa' in result) {
+      return result;
+    }
+    this.setCookies(res, result);
 
     return { message: 'Logged in successfully' };
   }
