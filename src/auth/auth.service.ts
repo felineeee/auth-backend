@@ -5,6 +5,8 @@ import { PrismaService } from 'src/prisma.service';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
 import { AuthDto } from './auth.dto';
+import { authenticator } from 'otplib';
+import * as qrcode from 'qrcode';
 import { access } from 'fs';
 import { debug } from 'console';
 
@@ -56,6 +58,14 @@ export class AuthService {
     const passwordMatches = await bcrypt.compare(dto.password, user.hash);
     if (!passwordMatches) {
       throw new ForbiddenException('Invalid credentials');
+    }
+
+    if (user.is2faEnabled) {
+      return {
+        requires2fa: true,
+        userId: user.id,
+        message: 'Please provide your 2FA authentication code to login.',
+      };
     }
 
     const tokens = await this.getTokens(user.id, user.email);
@@ -202,5 +212,42 @@ export class AuthService {
     return {
       message: 'Email verified successfully! Your account is now fully active.',
     };
+  }
+  async generate2faSecret(userId: number, email: string) {
+    const secret = authenticator.generateSecret();
+    const otpauthUrl = authenticator.keyuri(email, 'MyAuthBackendApp', secret);
+
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { twoFactorSecret: secret },
+    });
+
+    const qrCodeDataUrl = await qrcode.toDataURL(otpauthUrl);
+
+    return {
+      secret,
+      qrCodeDataUrl,
+    };
+  }
+  async verify2faToken(userId: number, token: string) {
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    if (!user || !user.twoFactorSecret)
+      throw new ForbiddenException('2FA is not set up');
+
+    const isValid = authenticator.verify({
+      token,
+      secret: user.twoFactorSecret,
+    });
+
+    if (!isValid)
+      throw new ForbiddenException('Invalid 2FA authentication code');
+    return true;
+  }
+  async enable2fa(userId: number) {
+    await this.prisma.user.update({
+      where: { id: userId },
+      data: { is2faEnabled: true },
+    });
+    return { message: 'Two-factor authentication successfully enabled!' };
   }
 }

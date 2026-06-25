@@ -21,6 +21,7 @@ import { ref } from 'process';
 import passport, { use } from 'passport';
 import { AuthGuard } from '@nestjs/passport';
 import { PrismaService } from 'src/prisma.service';
+import { BADFAMILY } from 'dns';
 
 @Controller('auth')
 @UseGuards(ThrottlerGuard)
@@ -155,5 +156,34 @@ export class AuthController {
     this.setCookies(res, tokens);
 
     return { message: 'Logged in via Google successfully!' };
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('2fa/generate')
+  async generate2fa(@Req() req: any) {
+    return this.authService.generate2faSecret(req.user.id, req.user.email);
+  }
+
+  @UseGuards(JwtGuard)
+  @Post('2fa/turn-on')
+  async turnOn2fa(@Req() req: any, @Body('code') code: string) {
+    await this.authService.verify2faToken(req.user.id, code);
+    return this.authService.enable2fa(req.user.id);
+  }
+
+  @Post('2fa/authenticate')
+  async authenticate2fa(
+    @Body('userId') userId: number,
+    @Body('code') code: string,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    await this.authService.verify2faToken(userId, code);
+
+    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    if (!user) throw new ForbiddenException('Access denied');
+
+    const token = await this.authService.getTokens(user.id, user.email);
+    await this.authService.updateRtHash(user.id, token.refresh_token);
+    return { message: 'Logged in successfully with 2FA' };
   }
 }
