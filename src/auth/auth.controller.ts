@@ -9,6 +9,7 @@ import {
   UseGuards,
   ForbiddenException,
 } from '@nestjs/common';
+import { ThrottlerGuard } from '@nestjs/throttler';
 import { type Response, type Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
@@ -18,6 +19,7 @@ import { PassThrough } from 'stream';
 import { ref } from 'process';
 
 @Controller('auth')
+@UseGuards(ThrottlerGuard)
 export class AuthController {
   constructor(
     private authService: AuthService,
