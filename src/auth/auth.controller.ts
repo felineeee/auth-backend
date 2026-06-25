@@ -4,6 +4,7 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  Get,
   Res,
   Req,
   UseGuards,
@@ -17,7 +18,9 @@ import { AuthDto } from './auth.dto';
 import { JwtGuard } from './guard/jwt.guard';
 import { PassThrough } from 'stream';
 import { ref } from 'process';
-import passport from 'passport';
+import passport, { use } from 'passport';
+import { AuthGuard } from '@nestjs/passport';
+import { PrismaService } from 'src/prisma.service';
 
 @Controller('auth')
 @UseGuards(ThrottlerGuard)
@@ -25,6 +28,7 @@ export class AuthController {
   constructor(
     private authService: AuthService,
     private jwtService: JwtService,
+    private prisma: PrismaService,
   ) {}
 
   private setCookies(
@@ -122,5 +126,34 @@ export class AuthController {
   @Post('verify-email')
   async verifyEmail(@Body('token') token: string) {
     return this.authService.verifyEmail(token);
+  }
+
+  @Get('google')
+  @UseGuards(AuthGuard('google'))
+  async googleAuth(@Req() req: Request) {}
+
+  @Get('google/callback')
+  @UseGuards(AuthGuard('google'))
+  async googleAuthRedirect(
+    @Req() req: any,
+    @Res({ passthrough: true }) res: Response,
+  ) {
+    const email = req.user.email;
+    let user = await this.prisma.user.findUnique({ where: email });
+
+    if (!user) {
+      user = await this.prisma.user.create({
+        data: {
+          email,
+          isVerfied: true,
+        },
+      });
+    }
+
+    const tokens = await this.authService.getTokens(user.id, user.email);
+    await this.authService.updateRtHash(user.id, tokens.refresh_token);
+    this.setCookies(res, tokens);
+
+    return { message: 'Logged in via Google successfully!' };
   }
 }

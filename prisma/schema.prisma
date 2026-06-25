@@ -14,7 +14,7 @@ datasource db {
 model User{
   id  Int @id @default(autoincrement())
   email String @unique
-  hash  String
+  hash  String?
   resetToken  String?
   resetTokenExpires DateTime?
   isVerfied Boolean @default(false)

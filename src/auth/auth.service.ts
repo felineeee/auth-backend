@@ -52,6 +52,7 @@ export class AuthService {
       throw new ForbiddenException('Invalid credentials');
     }
 
+    // ERR changes on optional `hash` field, on OAuth login feature
     const passwordMatches = await bcrypt.compare(dto.password, user.hash);
     if (!passwordMatches) {
       throw new ForbiddenException('Invalid credentials');
