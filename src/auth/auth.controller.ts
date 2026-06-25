@@ -17,6 +17,7 @@ import { AuthDto } from './auth.dto';
 import { JwtGuard } from './guard/jwt.guard';
 import { PassThrough } from 'stream';
 import { ref } from 'process';
+import passport from 'passport';
 
 @Controller('auth')
 @UseGuards(ThrottlerGuard)
@@ -78,6 +79,19 @@ export class AuthController {
     res.clearCookie('refresh_token');
 
     return { message: 'Logged out successfully' };
+  }
+
+  @Post('forgot-password')
+  async forgotPassword(@Body('email') email: string) {
+    return this.authService.forgotPassword(email);
+  }
+
+  @Post('reset-password')
+  async resetPassword(
+    @Body('token') token: string,
+    @Body('newPassword') newPassword: string,
+  ) {
+    return this.authService.resetPassword(token, newPassword);
   }
 
   @HttpCode(HttpStatus.OK)

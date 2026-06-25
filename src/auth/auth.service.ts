@@ -3,8 +3,10 @@ import { UsersService } from 'src/users/users.service';
 import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma.service';
 import * as bcrypt from 'bcrypt';
+import * as crypto from 'crypto';
 import { AuthDto } from './auth.dto';
 import { access } from 'fs';
+import { debug } from 'console';
 
 @Injectable()
 export class AuthService {
@@ -52,6 +54,58 @@ export class AuthService {
       where: { id: userId },
       data: { hashedRt: null },
     });
+  }
+
+  async forgotPassword(email: string) {
+    const user = await this.usersService.findByEmail(email);
+    if (!user)
+      return {
+        message: 'If that email exists, a reset link has been generated.',
+      };
+    const token = crypto.randomBytes(32).toString('hex');
+    const expires = new Date(Date.now() + 15 * 20 * 1000);
+
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: {
+        resetToken: token,
+        resetTokenExpired: expires,
+      },
+    });
+
+    return {
+      message: 'If that email exists, a reset link has been generated.',
+      debug_token: token,
+    };
+  }
+
+  async resetPassword(token: string, newPassword: string) {
+    const user = await this.prisma.user.findFirst({
+      where: {
+        resetToken: token,
+        resetTokenExpires: {
+          gt: new Date(), //Mistake on fields type on schema.prisma
+        },
+      },
+    });
+
+    if (!user) {
+      throw new ForbiddenException('Invalid or expired password reset token.');
+    }
+
+    const newHash = await bcrypt.hash(newPassword, 10);
+
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: {
+        hash: newHash,
+        resetToken: null,
+        resetTokenExpires: null,
+        hashedRt: null,
+      },
+    });
+
+    return { message: 'Password has been updated successfully.' };
   }
 
   private async signToken(
