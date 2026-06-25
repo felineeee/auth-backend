@@ -118,4 +118,9 @@ export class AuthController {
       throw new ForbiddenException('Access Denied');
     }
   }
+
+  @Post('verify-email')
+  async verifyEmail(@Body('token') token: string) {
+    return this.authService.verifyEmail(token);
+  }
 }

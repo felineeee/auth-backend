@@ -24,12 +24,26 @@ export class AuthService {
 
     const saltRounds = 10;
     const hash = await bcrypt.hash(dto.password, saltRounds);
-    const newUser = await this.usersService.create(dto.email, hash);
+    const vToken = crypto.randomBytes(32).toString('hex');
+
+    // @TODO create new query for this
+    const newUser = await this.prisma.user.create({
+      data: {
+        email: dto.email,
+        hash,
+        verificationToken: vToken,
+        isVerified: false,
+      },
+    });
 
     const tokens = await this.getTokens(newUser.id, newUser.email);
-
     await this.updateRtHash(newUser.id, tokens.refresh_token);
-    return tokens;
+
+    // return tokens;
+    return {
+      ...tokens,
+      debug_verification_token: vToken,
+    };
   }
 
   async signin(dto: AuthDto) {
@@ -165,5 +179,27 @@ export class AuthService {
       where: { id: userId },
       data: { hashedRt: hash },
     });
+  }
+
+  async verifyEmail(token: string) {
+    const user = await this.prisma.user.findFirst({
+      where: { verificationToken: token },
+    });
+
+    if (!user) {
+      throw new ForbiddenException('Invalid or expired verification token.');
+    }
+
+    await this.prisma.user.update({
+      where: { id: user.id },
+      data: {
+        isVerfied: true,
+        verificationToken: null,
+      },
+    });
+
+    return {
+      message: 'Email verified successfully! Your account is now fully active.',
+    };
   }
 }
