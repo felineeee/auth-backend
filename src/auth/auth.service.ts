@@ -4,7 +4,7 @@ import { JwtService } from '@nestjs/jwt';
 import { PrismaService } from 'src/prisma.service';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
-import { AuthDto } from './auth.dto';
+import { AuthDto } from './dto/auth.dto';
 import * as otplib from 'otplib';
 import * as qrcode from 'qrcode';
 import { access } from 'fs';

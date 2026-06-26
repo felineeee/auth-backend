@@ -14,7 +14,7 @@ import { ThrottlerGuard } from '@nestjs/throttler';
 import { type Response, type Request } from 'express';
 import { JwtService } from '@nestjs/jwt';
 import { AuthService } from './auth.service';
-import { AuthDto } from './auth.dto';
+import { AuthDto } from './dto/auth.dto';
 import { JwtGuard } from './guard/jwt.guard';
 import { PassThrough } from 'stream';
 import { ref } from 'process';
@@ -23,6 +23,11 @@ import { AuthGuard } from '@nestjs/passport';
 import { PrismaService } from 'src/prisma.service';
 import { BADFAMILY } from 'dns';
 import { UsersService } from 'src/users/users.service';
+import { ForgotPasswordDto } from './dto/forgot-password.dto';
+import { ResetPasswordDto } from './dto/reset-password.dto';
+import { VerifyEmailDto } from './dto/verify-email.dto';
+import { TurnOn2faDto } from './dto/turn-on-2fa.dto';
+import { Authenticate2faDto } from './dto/authenticate-2fa.dto';
 
 @Controller('auth')
 @UseGuards(ThrottlerGuard)
@@ -31,7 +36,6 @@ export class AuthController {
     private authService: AuthService,
     private userService: UsersService,
     private jwtService: JwtService,
-    private prisma: PrismaService,
   ) {}
 
   private setCookies(
@@ -92,16 +96,13 @@ export class AuthController {
   }
 
   @Post('forgot-password')
-  async forgotPassword(@Body('email') email: string) {
-    return this.authService.forgotPassword(email);
+  async forgotPassword(@Body() dto: ForgotPasswordDto) {
+    return this.authService.forgotPassword(dto.email);
   }
 
   @Post('reset-password')
-  async resetPassword(
-    @Body('token') token: string,
-    @Body('newPassword') newPassword: string,
-  ) {
-    return this.authService.resetPassword(token, newPassword);
+  async resetPassword(@Body() dto: ResetPasswordDto) {
+    return this.authService.resetPassword(dto.token, dto.password);
   }
 
   @HttpCode(HttpStatus.OK)
@@ -130,8 +131,8 @@ export class AuthController {
   }
 
   @Post('verify-email')
-  async verifyEmail(@Body('token') token: string) {
-    return this.authService.verifyEmail(token);
+  async verifyEmail(@Body() dto: VerifyEmailDto) {
+    return this.authService.verifyEmail(dto.token);
   }
 
   @Get('google')
@@ -168,20 +169,19 @@ export class AuthController {
 
   @UseGuards(JwtGuard)
   @Post('2fa/turn-on')
-  async turnOn2fa(@Req() req: any, @Body('code') code: string) {
-    await this.authService.verify2faToken(req.user.id, code);
+  async turnOn2fa(@Req() req: any, @Body() dto: TurnOn2faDto) {
+    await this.authService.verify2faToken(req.user.id, dto.code);
     return this.authService.enable2fa(req.user.id);
   }
 
   @Post('2fa/authenticate')
   async authenticate2fa(
-    @Body('userId') userId: number,
-    @Body('code') code: string,
+    @Body() dto: Authenticate2faDto,
     @Res({ passthrough: true }) res: Response,
   ) {
-    await this.authService.verify2faToken(userId, code);
+    await this.authService.verify2faToken(dto.userId, dto.code);
 
-    const user = await this.userService.findById(userId);
+    const user = await this.userService.findById(dto.userId);
     if (!user) throw new ForbiddenException('Access denied');
 
     const token = await this.authService.getTokens(user.id, user.email);
