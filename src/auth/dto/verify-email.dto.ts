@@ -8,5 +8,5 @@ export class VerifyEmailDto {
   })
   @IsString()
   @IsNotEmpty()
-  token: string;
+  token!: string;
 }
