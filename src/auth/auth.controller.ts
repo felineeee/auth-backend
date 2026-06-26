@@ -22,12 +22,14 @@ import passport, { use } from 'passport';
 import { AuthGuard } from '@nestjs/passport';
 import { PrismaService } from 'src/prisma.service';
 import { BADFAMILY } from 'dns';
+import { UsersService } from 'src/users/users.service';
 
 @Controller('auth')
 @UseGuards(ThrottlerGuard)
 export class AuthController {
   constructor(
     private authService: AuthService,
+    private userService: UsersService,
     private jwtService: JwtService,
     private prisma: PrismaService,
   ) {}
@@ -143,14 +145,11 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     const email = req.user.email;
-    let user = await this.prisma.user.findUnique({ where: email });
-
+    let user = await this.userService.findByEmail(email);
     if (!user) {
-      user = await this.prisma.user.create({
-        data: {
-          email,
-          isVerfied: true,
-        },
+      user = await this.userService.create({
+        email,
+        isVerified: true,
       });
     }
 
@@ -182,7 +181,7 @@ export class AuthController {
   ) {
     await this.authService.verify2faToken(userId, code);
 
-    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    const user = await this.userService.findById(userId);
     if (!user) throw new ForbiddenException('Access denied');
 
     const token = await this.authService.getTokens(user.id, user.email);

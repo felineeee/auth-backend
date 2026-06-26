@@ -29,13 +29,11 @@ export class AuthService {
     const vToken = crypto.randomBytes(32).toString('hex');
 
     // @TODO create new query for this
-    const newUser = await this.prisma.user.create({
-      data: {
-        email: dto.email,
-        hash,
-        verificationToken: vToken,
-        isVerified: false,
-      },
+    const newUser = await this.usersService.create({
+      email: dto.email,
+      hash,
+      verificationToken: vToken,
+      isVerified: false,
     });
 
     const tokens = await this.getTokens(newUser.id, newUser.email);
@@ -80,10 +78,7 @@ export class AuthService {
   }
 
   async logout(userId: number) {
-    await this.prisma.user.update({
-      where: { id: userId },
-      data: { hashedRt: null },
-    });
+    await this.usersService.update(userId, { hashedRt: null });
   }
 
   async forgotPassword(email: string) {
@@ -95,12 +90,9 @@ export class AuthService {
     const token = crypto.randomBytes(32).toString('hex');
     const expires = new Date(Date.now() + 15 * 20 * 1000);
 
-    await this.prisma.user.update({
-      where: { id: user.id },
-      data: {
-        resetToken: token,
-        resetTokenExpired: expires,
-      },
+    await this.usersService.update(user.id, {
+      resetToken: token,
+      resetTokenExpires: expires,
     });
 
     return {
@@ -110,12 +102,10 @@ export class AuthService {
   }
 
   async resetPassword(token: string, newPassword: string) {
-    const user = await this.prisma.user.findFirst({
-      where: {
-        resetToken: token,
-        resetTokenExpires: {
-          gt: new Date(), //Mistake on fields type on schema.prisma
-        },
+    const user = await this.usersService.findFirst({
+      resetToken: token,
+      resetTokenExpires: {
+        gt: new Date(),
       },
     });
 
@@ -125,36 +115,13 @@ export class AuthService {
 
     const newHash = await bcrypt.hash(newPassword, 10);
 
-    await this.prisma.user.update({
-      where: { id: user.id },
-      data: {
-        hash: newHash,
-        resetToken: null,
-        resetTokenExpires: null,
-        hashedRt: null,
-      },
+    await this.usersService.update(user.id, {
+      hash: newHash,
+      resetToken: null,
+      resetTokenExpires: null,
+      hashedRt: null,
     });
-
     return { message: 'Password has been updated successfully.' };
-  }
-
-  private async signToken(
-    userId: number,
-    email: string,
-  ): Promise<{ access_token: string }> {
-    const secret = process.env.JWT_SECRET;
-    if (!secret) {
-      throw new Error(
-        'FATAL CONFIGURATION ERROR: JWT_SECRET environment variable is not defined!',
-      );
-    }
-    const payload = { sub: userId, email };
-    const token = await this.jwtService.signAsync(payload, {
-      expiresIn: '15m',
-      secret: secret,
-    });
-
-    return { access_token: token };
   }
 
   async getTokens(userId: number, email: string) {
@@ -175,9 +142,7 @@ export class AuthService {
   }
 
   async refreshTokens(userId: number, refreshToken: string) {
-    const user = await this.prisma.user.findUnique({
-      where: { id: userId },
-    });
+    const user = await this.usersService.findById(userId);
     if (!user || !user.hashedRt) throw new ForbiddenException('Access Denied');
 
     const rtMatches = await bcrypt.compare(refreshToken, user.hashedRt);
@@ -191,27 +156,21 @@ export class AuthService {
   async updateRtHash(userId: number, refreshToken: string) {
     // TODO var saltRound
     const hash = await bcrypt.hash(refreshToken, 10);
-    await this.prisma.user.update({
-      where: { id: userId },
-      data: { hashedRt: hash },
-    });
+    await this.usersService.update(userId, { hashedRt: hash });
   }
 
   async verifyEmail(token: string) {
-    const user = await this.prisma.user.findFirst({
-      where: { verificationToken: token },
+    const user = await this.usersService.findFirst({
+      verificationToken: token,
     });
 
     if (!user) {
       throw new ForbiddenException('Invalid or expired verification token.');
     }
 
-    await this.prisma.user.update({
-      where: { id: user.id },
-      data: {
-        isVerfied: true,
-        verificationToken: null,
-      },
+    await this.usersService.update(user.id, {
+      isVerified: true,
+      verificationToken: null,
     });
 
     return {
@@ -226,10 +185,7 @@ export class AuthService {
       secret: secret,
     });
 
-    await this.prisma.user.update({
-      where: { id: userId },
-      data: { twoFactorSecret: secret },
-    });
+    await this.usersService.update(userId, { twoFactorSecret: secret });
 
     const qrCodeDataUrl = await qrcode.toDataURL(otpauthUrl);
 
@@ -239,7 +195,7 @@ export class AuthService {
     };
   }
   async verify2faToken(userId: number, token: string) {
-    const user = await this.prisma.user.findUnique({ where: { id: userId } });
+    const user = await this.usersService.findById(userId);
     if (!user || !user.twoFactorSecret)
       throw new ForbiddenException('2FA is not set up');
 
@@ -253,10 +209,7 @@ export class AuthService {
     return true;
   }
   async enable2fa(userId: number) {
-    await this.prisma.user.update({
-      where: { id: userId },
-      data: { is2faEnabled: true },
-    });
+    await this.usersService.update(userId, { is2faEnabled: true });
     return { message: 'Two-factor authentication successfully enabled!' };
   }
 }

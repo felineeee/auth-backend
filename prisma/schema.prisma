@@ -17,7 +17,7 @@ model User{
   hash  String?
   resetToken  String?
   resetTokenExpires DateTime?
-  isVerfied Boolean @default(false)
+  isVerified Boolean @default(false)
   verificationToken String?
   twoFactorSecret String?
   is2faEnabled  Boolean @default(false)
