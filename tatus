@@ -1,0 +1,306 @@
+Jul 08 23:46:36 fedora systemd[2410]: Started wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has finished successfully[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished successfully.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 45.[0m
+Jul 08 23:46:36 fedora wireplumber[2482]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mdefault: Failed to get percentage from UPower: org.freedesktop.DBus.Error.NameHasNoOwner[0m
+Jul 08 23:46:36 fedora wireplumber[2482]: [0:00:26.744575747] [2482]  INFO Camera camera_manager.cpp:330 libcamera v0.5.2
+Jul 08 23:46:36 fedora wireplumber[2482]: [0:00:26.874954131] [2799]  INFO Camera camera_manager.cpp:220 Adding camera '\_SB_.PCI0.GP17.XHC0.RHUB.PRT3-3:1.0-13d3:56ff' for pipeline handler uvcvideo
+Jul 08 23:46:44 fedora systemd[2410]: Stopping wireplumber.service - Multimedia Service Session Manager...
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has begun execution[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has begun execution.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 341.[0m
+Jul 08 23:46:44 fedora wireplumber[2482]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55e39a496ec0: leaked proxy 0x55e39a58da30 id:3[0m
+Jul 08 23:46:44 fedora wireplumber[2482]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55e39a496ec0: leaked proxy 0x55e39a5cd5f0 id:4[0m
+Jul 08 23:46:44 fedora wireplumber[2482]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55e39a496ec0: leaked proxy 0x55e39a6c2530 id:6[0m
+Jul 08 23:46:44 fedora wireplumber[2482]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55e39a496ec0: leaked proxy 0x55e39a6c9050 id:9[0m
+Jul 08 23:46:44 fedora wireplumber[2482]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55e39a496ec0: leaked proxy 0x55e39a4a4310 id:10[0m
+Jul 08 23:46:44 fedora wireplumber[2482]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55e39a496ec0: leaked proxy 0x55e39a410660 id:11[0m
+Jul 08 23:46:44 fedora systemd[2410]: Stopped wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has finished[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has finished.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 341 and the job result is done.[0m
+Jul 08 23:46:44 fedora systemd[2410]: Started wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has finished successfully[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished successfully.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 341.[0m
+Jul 08 23:46:44 fedora wireplumber[5375]: [0:00:34.752108249] [5375]  INFO Camera camera_manager.cpp:330 libcamera v0.5.2
+Jul 08 23:46:44 fedora wireplumber[5375]: [0:00:34.856352415] [5680]  INFO Camera camera_manager.cpp:220 Adding camera '\_SB_.PCI0.GP17.XHC0.RHUB.PRT3-3:1.0-13d3:56ff' for pipeline handler uvcvideo
+Jul 08 23:46:46 fedora systemd[2410]: Stopping wireplumber.service - Multimedia Service Session Manager...
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has begun execution[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has begun execution.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 426.[0m
+Jul 08 23:46:46 fedora wireplumber[5375]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x5632a7c8d230: leaked proxy 0x5632a7ce1a50 id:3[0m
+Jul 08 23:46:46 fedora wireplumber[5375]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x5632a7c8d230: leaked proxy 0x5632a7cd5fd0 id:4[0m
+Jul 08 23:46:46 fedora wireplumber[5375]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x5632a7c8d230: leaked proxy 0x5632a7eac620 id:6[0m
+Jul 08 23:46:46 fedora wireplumber[5375]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x5632a7c8d230: leaked proxy 0x5632a7dfae40 id:9[0m
+Jul 08 23:46:46 fedora wireplumber[5375]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x5632a7c8d230: leaked proxy 0x5632a7eab410 id:10[0m
+Jul 08 23:46:46 fedora wireplumber[5375]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x5632a7c8d230: leaked proxy 0x5632a7cbfff0 id:11[0m
+Jul 08 23:46:46 fedora systemd[2410]: Stopped wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has finished[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has finished.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 426 and the job result is done.[0m
+Jul 08 23:46:46 fedora systemd[2410]: Started wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has finished successfully[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished successfully.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 426.[0m
+Jul 08 23:46:46 fedora wireplumber[6064]: [0:00:36.631066987] [6064]  INFO Camera camera_manager.cpp:330 libcamera v0.5.2
+Jul 08 23:46:46 fedora wireplumber[6064]: [0:00:36.639153019] [6320]  INFO Camera camera_manager.cpp:220 Adding camera '\_SB_.PCI0.GP17.XHC0.RHUB.PRT3-3:1.0-13d3:56ff' for pipeline handler uvcvideo
+Jul 08 23:46:48 fedora systemd[2410]: Stopping wireplumber.service - Multimedia Service Session Manager...
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has begun execution[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has begun execution.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 511.[0m
+Jul 08 23:46:48 fedora wireplumber[6064]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55d2fb838740: leaked proxy 0x55d2fb8b3010 id:3[0m
+Jul 08 23:46:48 fedora wireplumber[6064]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55d2fb838740: leaked proxy 0x55d2fb89c820 id:4[0m
+Jul 08 23:46:48 fedora wireplumber[6064]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55d2fb838740: leaked proxy 0x55d2fba65090 id:6[0m
+Jul 08 23:46:48 fedora wireplumber[6064]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55d2fb838740: leaked proxy 0x55d2fb8a8610 id:7[0m
+Jul 08 23:46:48 fedora wireplumber[6064]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55d2fb838740: leaked proxy 0x55d2fb8a8e50 id:8[0m
+Jul 08 23:46:48 fedora wireplumber[6064]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55d2fb838740: leaked proxy 0x55d2fb9b35a0 id:11[0m
+Jul 08 23:46:48 fedora systemd[2410]: Stopped wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has finished[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has finished.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 511 and the job result is done.[0m
+Jul 08 23:46:48 fedora systemd[2410]: Started wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has finished successfully[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished successfully.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 511.[0m
+Jul 08 23:46:49 fedora wireplumber[7293]: [0:00:39.279205176] [7293]  INFO Camera camera_manager.cpp:330 libcamera v0.5.2
+Jul 08 23:46:49 fedora wireplumber[7293]: [0:00:39.288528557] [7394]  INFO Camera camera_manager.cpp:220 Adding camera '\_SB_.PCI0.GP17.XHC0.RHUB.PRT3-3:1.0-13d3:56ff' for pipeline handler uvcvideo
+Jul 08 23:46:53 fedora systemd[2410]: Stopping wireplumber.service - Multimedia Service Session Manager...
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has begun execution[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has begun execution.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 601.[0m
+Jul 08 23:46:53 fedora wireplumber[7293]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55cd26d08230: leaked proxy 0x55cd26d4e930 id:3[0m
+Jul 08 23:46:53 fedora wireplumber[7293]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55cd26d08230: leaked proxy 0x55cd26d48e70 id:4[0m
+Jul 08 23:46:53 fedora wireplumber[7293]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55cd26d08230: leaked proxy 0x55cd26e020d0 id:6[0m
+Jul 08 23:46:53 fedora wireplumber[7293]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55cd26d08230: leaked proxy 0x55cd26e6ccf0 id:7[0m
+Jul 08 23:46:53 fedora wireplumber[7293]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55cd26d08230: leaked proxy 0x55cd26e6e960 id:8[0m
+Jul 08 23:46:53 fedora wireplumber[7293]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x55cd26d08230: leaked proxy 0x55cd26c7e350 id:11[0m
+Jul 08 23:46:53 fedora systemd[2410]: Stopped wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has finished[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has finished.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 601 and the job result is done.[0m
+Jul 08 23:46:53 fedora systemd[2410]: Started wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has finished successfully[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished successfully.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 601.[0m
+Jul 08 23:46:53 fedora systemd[2410]: Stopping wireplumber.service - Multimedia Service Session Manager...
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has begun execution[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has begun execution.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 669.[0m
+Jul 08 23:46:53 fedora systemd[2410]: Stopped wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has finished[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has finished.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 669 and the job result is done.[0m
+Jul 08 23:46:53 fedora systemd[2410]: Started wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has finished successfully[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished successfully.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 669.[0m
+Jul 08 23:46:53 fedora systemd[2410]: Stopping wireplumber.service - Multimedia Service Session Manager...
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has begun execution[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has begun execution.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 737.[0m
+Jul 08 23:46:53 fedora systemd[2410]: Stopped wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has finished[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has finished.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 737 and the job result is done.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mDependency failed for wireplumber.service - Multimedia Service Session Manager.[0m
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has failed[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished with a failure.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 737 and the job result is dependency.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;39m[0;1;31m[0;1;39mwireplumber.service: Job wireplumber.service/start failed with result 'dependency'.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mDependency failed for wireplumber.service - Multimedia Service Session Manager.[0m
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has failed[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished with a failure.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 758 and the job result is dependency.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;39m[0;1;31m[0;1;39mwireplumber.service: Job wireplumber.service/start failed with result 'dependency'.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mDependency failed for wireplumber.service - Multimedia Service Session Manager.[0m
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has failed[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished with a failure.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 761 and the job result is dependency.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;39m[0;1;31m[0;1;39mwireplumber.service: Job wireplumber.service/start failed with result 'dependency'.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mDependency failed for wireplumber.service - Multimedia Service Session Manager.[0m
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has failed[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished with a failure.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 802 and the job result is dependency.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;39m[0;1;31m[0;1;39mwireplumber.service: Job wireplumber.service/start failed with result 'dependency'.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mDependency failed for wireplumber.service - Multimedia Service Session Manager.[0m
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has failed[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished with a failure.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 825 and the job result is dependency.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;39m[0;1;31m[0;1;39mwireplumber.service: Job wireplumber.service/start failed with result 'dependency'.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mDependency failed for wireplumber.service - Multimedia Service Session Manager.[0m
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has failed[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished with a failure.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 828 and the job result is dependency.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;39m[0;1;31m[0;1;39mwireplumber.service: Job wireplumber.service/start failed with result 'dependency'.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mDependency failed for wireplumber.service - Multimedia Service Session Manager.[0m
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has failed[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished with a failure.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 869 and the job result is dependency.[0m
+Jul 08 23:46:53 fedora systemd[2410]: [0;1;39m[0;1;31m[0;1;39mwireplumber.service: Job wireplumber.service/start failed with result 'dependency'.[0m
+Jul 09 00:00:59 fedora systemd[2410]: Started wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has finished successfully[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished successfully.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 1218.[0m
+Jul 09 00:00:59 fedora systemd[2410]: Stopping wireplumber.service - Multimedia Service Session Manager...
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has begun execution[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has begun execution.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 1244.[0m
+Jul 09 00:00:59 fedora systemd[2410]: Stopped wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has finished[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has finished.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 1244 and the job result is done.[0m
+Jul 09 00:00:59 fedora systemd[2410]: Started wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has finished successfully[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished successfully.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 1244.[0m
+Jul 09 00:00:59 fedora wireplumber[15812]: [0:14:49.485813075] [15812]  INFO Camera camera_manager.cpp:330 libcamera v0.5.2
+Jul 09 00:00:59 fedora wireplumber[15812]: [0:14:49.586213590] [16102]  INFO Camera camera_manager.cpp:220 Adding camera '\_SB_.PCI0.GP17.XHC0.RHUB.PRT3-3:1.0-13d3:56ff' for pipeline handler uvcvideo
+Jul 09 00:01:44 fedora systemd[2410]: Stopping wireplumber.service - Multimedia Service Session Manager...
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has begun execution[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has begun execution.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 1288.[0m
+Jul 09 00:01:44 fedora wireplumber[15812]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x5592b68a6cf0: leaked proxy 0x5592b69e4950 id:3[0m
+Jul 09 00:01:44 fedora wireplumber[15812]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x5592b68a6cf0: leaked proxy 0x5592b6906fc0 id:4[0m
+Jul 09 00:01:44 fedora wireplumber[15812]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x5592b68a6cf0: leaked proxy 0x5592b6ad6c00 id:6[0m
+Jul 09 00:01:44 fedora wireplumber[15812]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x5592b68a6cf0: leaked proxy 0x5592b6892210 id:9[0m
+Jul 09 00:01:44 fedora wireplumber[15812]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x5592b68a6cf0: leaked proxy 0x5592b6ad5970 id:10[0m
+Jul 09 00:01:44 fedora wireplumber[15812]: [0;1;38:5:185m[0;1;39m[0;1;38:5:185mpw.core: 0x5592b68a6cf0: leaked proxy 0x5592b69449c0 id:11[0m
+Jul 09 00:01:44 fedora systemd[2410]: Stopped wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A stop job for unit UNIT has finished[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA stop job for unit UNIT has finished.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 1288 and the job result is done.[0m
+Jul 09 00:01:44 fedora systemd[2410]: Started wireplumber.service - Multimedia Service Session Manager.
+[0;38:5:245m░░ [0m[0;32mSubject: A start job for unit UNIT has finished successfully[0m
+[0;38:5:245m░░[0m [0;32mDefined-By: systemd[0m
+[0;38:5:245m░░[0m [0;32mSupport: https://lists.freedesktop.org/mailman/listinfo/systemd-devel[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mA start job for unit UNIT has finished successfully.[0m
+[0;38:5:245m░░[0m [0;32m[0m
+[0;38:5:245m░░[0m [0;32mThe job identifier is 1288.[0m
+Jul 09 00:01:44 fedora wireplumber[16329]: [0:15:34.961709766] [16329]  INFO Camera camera_manager.cpp:330 libcamera v0.5.2
+Jul 09 00:01:44 fedora wireplumber[16329]: [0:15:35.061986985] [16640]  INFO Camera camera_manager.cpp:220 Adding camera '\_SB_.PCI0.GP17.XHC0.RHUB.PRT3-3:1.0-13d3:56ff' for pipeline handler uvcvideo

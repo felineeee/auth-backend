@@ -4,7 +4,8 @@ import request from 'supertest';
 import { AppModule } from './../src/app.module';
 import { PrismaService } from 'src/prisma.service';
 import * as dotenv from 'dotenv';
-dotenv.config(); // <-- This MUST run before any other imports
+dotenv.config();
+import cookieParser from 'cookie-parser';
 
 describe('Authentication Gateway (E2E)', () => {
   let app: INestApplication;
@@ -27,6 +28,7 @@ describe('Authentication Gateway (E2E)', () => {
     }).compile();
 
     app = moduleFixture.createNestApplication();
+    app.use(cookieParser());
 
     app.useGlobalPipes(
       new ValidationPipe({
@@ -117,7 +119,7 @@ describe('Authentication Gateway (E2E)', () => {
 
     it('should authenticate a verified user and accurately capture session cookies', async () => {
       const res = await request(app.getHttpServer())
-        .post('/auth/sign-in')
+        .post('/auth/signin')
         .send({ email: testUser.email, password: testUser.password })
         .expect(200);
 
@@ -125,11 +127,7 @@ describe('Authentication Gateway (E2E)', () => {
       expect(res.headers['set-cookie']).toBeDefined();
 
       const cookieHeader = res.headers['set-cookie'];
-      authCookies = Array.isArray(cookieHeader)
-        ? cookieHeader
-        : cookieHeader
-          ? [cookieHeader]
-          : [];
+      authCookies = cookieHeader ? [cookieHeader].flat() : [];
     });
   });
 
@@ -140,18 +138,14 @@ describe('Authentication Gateway (E2E)', () => {
     it('should reissue a clean cookie pair when presented with a valid refresh token cookie', async () => {
       const res = await request(app.getHttpServer())
         .post('/auth/refresh')
-        .set('Cookie', authCookies)
+        .set('Cookie', authCookies.join('; '))
         .expect(200);
 
       expect(res.body.message).toEqual('Tokens refreshed successfully');
       expect(res.headers['set-cookie']).toBeDefined();
 
       const cookieHeader = res.headers['set-cookie'];
-      authCookies = Array.isArray(cookieHeader)
-        ? cookieHeader
-        : cookieHeader
-          ? [cookieHeader]
-          : [];
+      authCookies = cookieHeader ? [cookieHeader].flat() : [];
     });
   });
 
