@@ -1,11 +1,10 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication, ValidationPipe } from '@nestjs/common';
 import request from 'supertest';
-import { App } from 'supertest/types';
 import { AppModule } from './../src/app.module';
 import { PrismaService } from 'src/prisma.service';
-import { after } from 'node:test';
-import passport from 'passport';
+import * as dotenv from 'dotenv';
+dotenv.config(); // <-- This MUST run before any other imports
 
 describe('Authentication Gateway (E2E)', () => {
   let app: INestApplication;
@@ -50,14 +49,13 @@ describe('Authentication Gateway (E2E)', () => {
 
   // REGISTRATION
   describe('POST /auth/signup', () => {
-    (it('should block registration if payload fields break DTO limits'),
-      async () => {
-        const res = await request(app.getHttpServer())
-          .post('/auth/signup')
-          .send({ email: 'malformed-email', password: '123' })
-          .expect(400);
-        expect(res.body.message).toContain('Invalid email address format');
-      });
+    it('should block registration if payload fields break DTO limits', async () => {
+      const res = await request(app.getHttpServer())
+        .post('/auth/signup')
+        .send({ email: 'malformed-email', password: '123' })
+        .expect(400);
+      expect(res.body.message).toContain('Invalid email address format');
+    });
 
     it('should successfully register a valid user, issue cookies, and generate an inactive state', async () => {
       const res = await request(app.getHttpServer())

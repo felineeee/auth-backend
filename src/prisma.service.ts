@@ -12,7 +12,7 @@ export class PrismaService
 
   constructor() {
     const pool = new Pool({
-      connectionString: process.env.DATABASE_URL,
+      connectionString: process.env.TEST_DATABASE_URL,
     });
 
     const adapter = new PrismaPg(pool);
@@ -24,7 +24,7 @@ export class PrismaService
     await this.$connect();
   }
   async onModuleDestroy() {
-    await this.$disconnect;
+    await this.$disconnect();
     await this.pool.end();
   }
 }

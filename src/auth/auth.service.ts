@@ -1,21 +1,17 @@
 import { ForbiddenException, Injectable } from '@nestjs/common';
-import { UsersService } from 'src/users/users.service';
+import { UsersService } from '../users/users.service';
 import { JwtService } from '@nestjs/jwt';
-import { PrismaService } from 'src/prisma.service';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
 import { AuthDto } from './dto/auth.dto';
 import * as otplib from 'otplib';
 import * as qrcode from 'qrcode';
-import { access } from 'fs';
-import { debug } from 'console';
 
 @Injectable()
 export class AuthService {
   constructor(
     private usersService: UsersService,
     private jwtService: JwtService,
-    private prisma: PrismaService,
   ) {}
 
   async signup(dto: AuthDto) {
