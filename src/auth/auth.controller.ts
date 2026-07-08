@@ -75,17 +75,10 @@ export class AuthController {
     @Res({ passthrough: true }) res: Response,
   ) {
     const result = await this.authService.signin(dto);
-
-    // DEBUG if its generating
-    console.log('1. [CONTROLLER] Result from AuthService:', result);
-
     if ('requires2fa' in result) {
       return result;
     }
     this.setCookies(res, result);
-
-    // DEBUG if its stored
-    console.log('2. [CONTROLLER] Queued Headers:', res.getHeader('set-cookie'));
 
     return { message: 'Logged in successfully' };
   }
@@ -118,37 +111,21 @@ export class AuthController {
     @Req() req: Request,
     @Res({ passthrough: true }) res: Response,
   ) {
-    // 1. Debug incoming cookies
-    console.log('--- DEBUG REFRESH ---');
-    console.log('All Cookies:', req.cookies);
-
     const refreshToken = req.cookies?.['refresh_token'];
-    console.log('Extracted Refresh Token:', refreshToken);
-
-    if (!refreshToken) {
-      console.log('Rejecting: No refresh token found in cookies');
-      throw new ForbiddenException('Access Denied');
-    }
+    if (!refreshToken) throw new ForbiddenException('Access Denied');
 
     try {
-      // 2. Debug JWT verification
       const payload = await this.jwtService.verifyAsync(refreshToken, {
         secret: process.env.JWT_SECRET,
       });
-      console.log('Decoded JWT Payload:', payload);
-
-      // 3. Debug database/service validation
-      console.log('Calling authService.refreshTokens with sub:', payload.sub);
       const tokens = await this.authService.refreshTokens(
         payload.sub,
         refreshToken,
       );
-
       this.setCookies(res, tokens);
+
       return { message: 'Tokens refreshed successfully' };
     } catch (error) {
-      // 4. Print the exact error details
-      // console.error('Refresh Catch Error:', error.message || error);
       throw new ForbiddenException('Access Denied');
     }
   }

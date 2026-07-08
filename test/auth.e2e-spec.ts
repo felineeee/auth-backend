@@ -161,7 +161,9 @@ describe('Authentication Gateway (E2E)', () => {
         where: { email: testUser.email },
       });
       expect(dbUser!.resetToken).toBeTruthy();
-      expect(dbUser!.resetTokenExpires).toBeGreaterThan(new Date().getTime());
+      expect(dbUser!.resetTokenExpires?.getTime()).toBeGreaterThan(
+        new Date().getTime(),
+      );
       savedResetToken = dbUser!.resetToken!;
     });
     it('should block password replacement payloads breaking DTO size limitations', async () => {
@@ -197,7 +199,7 @@ describe('Authentication Gateway (E2E)', () => {
         .set('Cookie', authCookies)
         .expect(201);
 
-      expect(res.body).toHaveProperty('qrCodeUrl');
+      expect(res.body).toHaveProperty('qrCodeDataUrl');
       const dbUser = await prisma.user.findUnique({
         where: { email: testUser.email },
       });
@@ -230,7 +232,7 @@ describe('Authentication Gateway (E2E)', () => {
 
       expect(res.body.message).toEqual('Logged out successfully');
 
-      const cookiesHeader = JSON.stringify(res.headers['set-cookies']);
+      const cookiesHeader = JSON.stringify(res.headers['set-cookie']);
       expect(cookiesHeader).toContain('access_token=;');
       expect(cookiesHeader).toContain('refresh_token=;');
 
