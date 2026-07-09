@@ -1,98 +1,106 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Production-ready Authentication Backend built with NestJS, Prisma 7, and PostgreSQL
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+## Preliminary
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+This project is an exploratory on my coding journey on authentication API design to demonstrate enterprise-grade security architecture, zero-trust data validation, and automated continuous integration. It handles complex credential workflows, including JWT rotation via HttpOnly cookies and Time-Based One-Time Passwords (TOTP) for Two-Factor Authentication (2FA).
 
-## Description
+## Architectural Goals
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+This project was engineered to master advanced backend concepts rather than relying on boilerplate solutions:
 
-## Project setup
+- **Strict Boundary Defense:** Utilizing NestJS `ValidationPipe` and DTOs to strip malicious payloads and prevent Mass Assignment vulnerabilities.
+- **Stateless Session Security:** Implementing asymmetric JWT Access and Refresh token rotation strictly over `HttpOnly` cookies to neutralize XSS vectors.
+- **Multi-Factor Authentication:** Orchestrating dynamic 2FA checkpoints using `otplib` and Passport.js.
+- **Isolated E2E Testing:** Building an automated, containerized testing pipeline using Jest, Supertest, and Docker to ensure regressions never reach production.
 
-```bash
-$ npm install
-```
+## Tech Stack
 
-## Compile and run the project
+| Technology            | Role in Project |
+| :-------------------- | :-------------- |
+| **NestJS**            | API Framework   |
+| **Prisma**            | Database ORM    |
+| **PostgreSQL**        | Database        |
+| **Passport.js / JWT** | Auth Engine     |
+| **Jest & Supertest**  | E2E Testing     |
 
-```bash
-# development
-$ npm run start
+## System Architecture & API Endpoints
 
-# watch mode
-$ npm run start:dev
+**Data Flow:** `Client Request -> DTO Validation Pipe -> Throttler Guard -> Passport Strategy -> Controller -> Service -> Prisma -> PostgreSQL`
 
-# production mode
-$ npm run start:prod
-```
+| Method | Endpoint                 | Protection    | Description                                                       |
+| :----- | :----------------------- | :------------ | :---------------------------------------------------------------- |
+| `POST` | `/auth/signup`           | Public        | Registers a new user and triggers verification state.             |
+| `POST` | `/auth/verify-email`     | Public        | Consumes a token to activate a user account.                      |
+| `POST` | `/auth/signin`           | Public        | Authenticates credentials; issues cookies or triggers 2FA prompt. |
+| `POST` | `/auth/refresh`          | Public        | Rotates Access/Refresh tokens via HttpOnly cookie validation.     |
+| `POST` | `/auth/logout`           | **JWT Guard** | Clears active server sessions and wipes client cookies.           |
+| `POST` | `/auth/forgot-password`  | Public        | Generates a secure, time-limited password recovery token.         |
+| `POST` | `/auth/reset-password`   | Public        | Consumes the recovery token to update the password hash.          |
+| `POST` | `/auth/2fa/generate`     | **JWT Guard** | Generates a TOTP secret and returns a QR code URL.                |
+| `POST` | `/auth/2fa/turn-on`      | **JWT Guard** | Validates the first 2FA code and locks it to the user account.    |
+| `POST` | `/auth/2fa/authenticate` | Public        | Secondary login checkpoint for 2FA-enabled accounts.              |
 
-## Run tests
+## Local Setup & Installation
 
-```bash
-# unit tests
-$ npm run test
+**Prerequisites:** You must have [Node.js](https://nodejs.org/) (v18+) and [Docker](https://www.docker.com/) installed on your machine.
 
-# e2e tests
-$ npm run test:e2e
+## Local Setup & Installation
 
-# test coverage
-$ npm run test:cov
-```
-
-## Deployment
-
-When you're ready to deploy your NestJS application to production, there are some key steps you can take to ensure it runs as efficiently as possible. Check out the [deployment documentation](https://docs.nestjs.com/deployment) for more information.
-
-If you are looking for a cloud-based platform to deploy your NestJS application, check out [Mau](https://mau.nestjs.com), our official platform for deploying NestJS applications on AWS. Mau makes deployment straightforward and fast, requiring just a few simple steps:
+### 1. Clone and Install
 
 ```bash
-$ npm install -g @nestjs/mau
-$ mau deploy
+git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
+cd YOUR_REPO_NAME
+npm install
 ```
 
-With Mau, you can deploy your application in just a few clicks, allowing you to focus on building features rather than managing infrastructure.
+### 2. Environment Configuration
 
-## Resources
+Configure the `.env` file in the root directory, paste the connection string to the template as such:
 
-Check out a few resources that may come in handy when working with NestJS:
+```
+# Database Configuration
+DEV_DATABASE_URL="postgresql://user:password@localhost:5432/myapp?schema=public"
+TEST_DATABASE_URL="postgresql://user:password@localhost:5433/myapp_test?schema=public"
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Deploy your application to AWS with the help of [NestJS Mau](https://mau.nestjs.com) in just a few clicks.
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+# JWT Secrets
+JWT_SECRET="replace_with_secure_jwt_secret"
+REFRESH_SECRET="replace_with_secure_refresh_secret"
+```
 
-## Support
+### 3. Boot the Database and Sync Schema
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+```
+# Start the PostgreSQL containers
+docker compose up -d
 
-## Stay in touch
+# Push the schema to the database
+npx prisma db push
+```
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+### 4. Start the Application
 
-## License
+```
+npm run start:dev
+```
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+### 5. Automate Testing (E2E)
+
+This project feature End-to-End test suite that simulates user lifecycles (Signup -> Verify -> Login -> Refresh -> Logout)
+
+```
+npm run test:e2e
+```
+
+## Roadmap & Planned Upgrades
+
+- [ ] **Database Hardening & Replay Defenses**
+      Expanding the Prisma PostgreSQL schema to track automated brute-force metrics (`failedAttempts`, `lockoutUntil`) and introducing a `tokenVersion` integer to establish a cryptographic baseline for refresh token replay defenses.
+- [ ] **Pre-Auth JWT Checkpoints (BOLA Mitigation)**
+      Refactoring the Two-Factor Authentication (2FA) workflow to issue short-lived (3-minute) Pre-Auth JWTs. This completely masks sequential database integer IDs from the frontend API network, neutralizing Broken Object Level Authorization (BOLA) vulnerabilities.
+- [ ] **Active Threat Interception (Service Layer)**
+      Wiring advanced business logic to automatically issue `423 Locked` HTTP exceptions upon excessive failed logins, and building active token-reuse detection to trigger global session revocations if cloned refresh tokens are detected in transit.
+- [ ] **Server Environment Hardening**
+      Locking down the Express.js network layer by integrating `Helmet.js` for strict HTTP header policies (preventing clickjacking and MIME-sniffing) alongside a heavily restricted CORS credential pipeline.
+- [ ] **Continuous Integration (E2E) Expansion**
+      Upgrading the `Supertest` automated testing matrix to handle encrypted Pre-Auth payloads and simulate advanced threat vectors (e.g., token replays and brute-force lockouts) against the dynamic Docker testing container.
