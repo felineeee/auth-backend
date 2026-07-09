@@ -49,8 +49,8 @@ This project was engineered to master advanced backend concepts rather than rely
 ### 1. Clone and Install
 
 ```bash
-git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
-cd YOUR_REPO_NAME
+git clone git@github.com:felineeee/auth-backend.git
+cd auth-backend
 npm install
 ```
 
@@ -60,6 +60,8 @@ Configure the `.env` file in the root directory, paste the connection string to 
 
 ```
 # Database Configuration
+## Fill the `TEST_DATABASE_URL` for now
+
 DEV_DATABASE_URL="postgresql://user:password@localhost:5432/myapp?schema=public"
 TEST_DATABASE_URL="postgresql://user:password@localhost:5433/myapp_test?schema=public"
 
